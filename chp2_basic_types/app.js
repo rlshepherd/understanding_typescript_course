@@ -25,3 +25,4 @@ function addAndHandle(n1, n2, cb) {
 addAndHandle(10, 20, function (result) {
     console.log(result);
 });
+// using a void return type for the callback lets you know that any result returned by the call back will not be used. 
