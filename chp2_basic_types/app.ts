@@ -1,34 +1,17 @@
-// Return Types
-function add(n1:number, n2:number) { // number return type. 
-    return n1 + n2; 
+
+let userInput: unknown; // unknown is more restrictive than any. 
+let userName: string;
+
+userInput = 5;
+userInput = 'Max';
+// userName = userInput; // this will fail b/c typescript knows the type might not be a string. 
+
+if (typeof userInput === 'string') { // typescript knows about this check. 
+    userName = userInput; // now ts allows it. 
 }
 
-function printResult(num: number) { // void return type. 
-    console.log('Result:' + num);
+function generateError(message: string, code: number): never { // never returns a result
+    throw {message: message, errorCode: code}
 }
 
-function printResultUndefined(num: number): undefined { // undefined is not the same as void.
-    console.log(num);
-    return;
-}
-
-// Function as a Type
-let combineValues: Function;
-combineValues = add; // this could be any function, even if it is wrong!
-console.log(combineValues(8, 8));
-
-
-// Function Types describe a function
-let combinedValues: (a: number, b: number) => number; // two params which are numbers, and returns one number. 
-combinedValues = add; 
-console.log(combinedValues(8, 8));
-
-// Callbacks and Function Types
-function addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
-    const result = n1 + n2;
-    cb(result);
-}
-addAndHandle(10, 20, (result) => {
-    console.log(result)
-});
-// using a void return type for the callback lets you know that any result returned by the call back will not be used. 
+generateError('An error occured!', 500); 
